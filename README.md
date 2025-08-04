@@ -37,9 +37,9 @@ Una aplicación Android que demuestra el manejo seguro de permisos y protección
 ## Ejecución de funciones y permisos nuevos    
 <img width="262" height="484" alt="Image" src="https://github.com/user-attachments/assets/b497db2b-9763-4239-b6a2-bdc93a02ade3" /> 
 <img width="262" height="484" alt="Image" src="https://github.com/user-attachments/assets/9bb208c6-e4b9-4073-bbf7-d804e8f79e30" /> 
-<img width="262" height="484" alt="Image" src="https://github.com/user-attachments/assets/6fa70a88-157c-4f23-b694-f644a98fd13f" />     
-<img width="262" height="434" alt="Image" src="https://github.com/user-attachments/assets/a6bee87e-1113-4d02-b19b-4f2d37cb2d55" /> 
-<img width="262" height="484" alt="Image" src="https://github.com/user-attachments/assets/fc041d42-18a4-4245-b745-a14b4fb87762" />  
+<img width="262" height="434" alt="Image" src="https://github.com/user-attachments/assets/a6bee87e-1113-4d02-b19b-4f2d37cb2d55" />       
+<img width="262" height="484" alt="Image" src="https://github.com/user-attachments/assets/6fa70a88-157c-4f23-b694-f644a98fd13f" /> 
+<img width="262" height="484" alt="Image" src="https://github.com/user-attachments/assets/fc041d42-18a4-4245-b745-a14b4fb87762" />     
 
 
 ## Licencia
