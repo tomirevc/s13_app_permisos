@@ -1,69 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    android:background="@color/white"
+    tools:context=".GalleryActivity">
 
+    <!-- Título de la actividad -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvGalleryTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/activity_gallery"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Estado del permiso de la galería -->
     <TextView
         android:id="@+id/tvGalleryStatus"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Estado del permiso de galería"
         android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toBottomOf="@id/tvGalleryTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Imagen seleccionada de la galería -->
     <ImageView
         android:id="@+id/ivSelectedImage"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="Imagen seleccionada de la galería"
         android:background="@android:color/darker_gray"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="Imagen seleccionada de la galería" />
+        app:layout_constraintTop_toBottomOf="@id/tvGalleryStatus"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.4"/>
 
-    <Button
+    <!-- Botón para seleccionar imagen -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSelectImage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_select_image"
-        android:layout_marginBottom="8dp" />
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/ivSelectedImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <Button
+    <!-- Botón para solicitar permisos -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRequestPermission"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_grant_permission"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/btnSelectImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Información sobre la imagen -->
     <TextView
         android:id="@+id/tvImageInfo"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="12sp"
         android:gravity="center"
+        android:textColor="@android:color/darker_gray"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/darker_gray" />
+        app:layout_constraintTop_toBottomOf="@id/btnRequestPermission"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Mensaje de seguridad de las imágenes -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="🔒 Las imágenes accedidas se registran de forma segura"
         android:textSize="12sp"
         android:gravity="center"
+        android:textColor="@android:color/darker_gray"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/darker_gray" />
+        app:layout_constraintTop_toBottomOf="@id/tvImageInfo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

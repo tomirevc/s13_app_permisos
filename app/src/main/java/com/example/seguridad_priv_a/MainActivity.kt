@@ -1,11 +1,18 @@
 package com.example.seguridad_priv_a
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.seguridad_priv_a.adapter.PermissionsAdapter
@@ -14,13 +21,14 @@ import com.example.seguridad_priv_a.data.PermissionStatus
 import com.example.seguridad_priv_a.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var permissionsAdapter: PermissionsAdapter
-    private val dataProtectionManager by lazy { 
-        (application as PermissionsApplication).dataProtectionManager 
+    private val dataProtectionManager by lazy {
+        (application as PermissionsApplication).dataProtectionManager
     }
-    
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private val permissions = listOf(
         PermissionItem(
             name = "Cámara",
@@ -64,14 +72,59 @@ class MainActivity : AppCompatActivity() {
             permission = null,
             activityClass = DataProtectionActivity::class.java
         ),
+
+        // Nuevo item para notificaciones
+        PermissionItem(
+            name = "Notificaciones de Acceso a Datos Sensibles",
+            description = "Recibir notificaciones cuando se accede a datos sensibles.",
+            permission = null,
+            activityClass = DataAccessNotificationActivity::class.java
+        ),
+
+        // Nuevo item para exportar logs
+        PermissionItem(
+            name = "Exportar Logs de Acceso",
+            description = "Exportar logs de acceso de datos sensibles.",
+            permission = null,
+            activityClass = ExportLogsActivity::class.java
+        ),
+
+        // Nuevo item para la configuración de privacidad
+        PermissionItem(
+            name = "Configuración de Privacidad",
+            description = "Administrar configuraciones de privacidad de la aplicación.",
+            permission = null,
+            activityClass = PrivacySettingsActivity::class.java
+        ),
+
+        // Nuevo item para el tutorial
+        PermissionItem(
+            name = "Tutorial de Permisos",
+            description = "Ver un tutorial sobre cómo otorgar permisos a la aplicación.",
+            permission = null,
+            activityClass = PermissionTutorialActivity::class.java
+        ),
+
+        // Nuevo item para autenticación biométrica
+        PermissionItem(
+            name = "Autenticación Biométrica",
+            description = "Configurar autenticación biométrica para acceder a la aplicación.",
+            permission = null,
+            activityClass = BiometricAuthenticationActivity::class.java
+        ),
+
         PermissionItem(
             name = "Política de Privacidad",
             description = "Política de privacidad y términos",
             permission = null,
             activityClass = PrivacyPolicyActivity::class.java
         )
+
+
+
+
     )
-    
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
@@ -79,41 +132,41 @@ class MainActivity : AppCompatActivity() {
         if (permission != null) {
             permission.status = if (isGranted) PermissionStatus.GRANTED else PermissionStatus.DENIED
             permissionsAdapter.updatePermissionStatus(permission)
-            
+
             val status = if (isGranted) "OTORGADO" else "DENEGADO"
             dataProtectionManager.logAccess("PERMISSION", "${permission.name}: $status")
-            
+
             if (isGranted) {
                 openActivity(permission)
             }
             currentRequestedPermission = null
         }
     }
-    
+
     private var currentRequestedPermission: PermissionItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
         setupRecyclerView()
         updatePermissionStatuses()
-        
+
         dataProtectionManager.logAccess("NAVIGATION", "MainActivity abierta")
     }
-    
+
     private fun setupRecyclerView() {
         permissionsAdapter = PermissionsAdapter(permissions) { permission ->
             handlePermissionClick(permission)
         }
-        
+
         binding.rvPermissions.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = permissionsAdapter
         }
     }
-    
+
     private fun updatePermissionStatuses() {
         permissions.forEach { permission ->
             permission.permission?.let { perm ->
@@ -135,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         }
         permissionsAdapter.notifyDataSetChanged()
     }
-    
+
     private fun handlePermissionClick(permission: PermissionItem) {
         when {
             permission.permission == null -> {
@@ -154,7 +207,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    
+
     private fun requestPermission(permission: PermissionItem) {
         permission.permission?.let { perm ->
             currentRequestedPermission = permission
@@ -162,7 +215,7 @@ class MainActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(perm)
         }
     }
-    
+
     private fun openActivity(permission: PermissionItem) {
         permission.activityClass?.let { activityClass ->
             val intent = Intent(this, activityClass)
@@ -170,9 +223,38 @@ class MainActivity : AppCompatActivity() {
             dataProtectionManager.logAccess("NAVIGATION", "${permission.name} actividad abierta")
         }
     }
-    
+
     override fun onResume() {
         super.onResume()
         updatePermissionStatuses()
     }
+
+    val CHANNEL_ID = "data_access_channel"
+
+    fun createNotificationChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Data Access Notifications"
+            val descriptionText = "Notifications for sensitive data access"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    fun showDataAccessNotification(context: Context, message: String) {
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle("Acceso a Datos Sensibles")
+            .setContentText(message)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .build()
+
+        NotificationManagerCompat.from(context).notify(1, notification)
+    }
+
 }

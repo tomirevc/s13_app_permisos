@@ -65,4 +65,44 @@
     <string name="log_entry_format">%1$s - %2$s: %3$s</string>
     <string name="encryption_info">Los datos sensibles se encriptan usando AES-256</string>
     <string name="privacy_policy_text">Esta aplicación es una demostración de permisos y protección de datos en Android.\n\nPermisos utilizados:\n• Cámara: Para tomar fotos de demostración\n• Galería: Para seleccionar imágenes\n• Micrófono: Para grabar audio\n• Contactos: Para mostrar lista de contactos\n• Teléfono: Para realizar llamadas\n• Ubicación: Para obtener ubicación aproximada\n\nProtección de datos:\n• Todos los accesos se registran\n• Los datos se encriptan localmente\n• Se puede borrar toda la información\n• No se comparten datos con terceros</string>
+
+    <string name="biometric_title">Autenticación Biométrica</string>
+    <string name="biometric_subtitle">Usa tu huella dactilar o reconocimiento facial</string>
+    <string name="biometric_status">Esperando autenticación...</string>
+    <string name="btn_authenticate">Autenticarse</string>
+    <string name="cancel">Cancelar</string>
+    <string name="biometric_success">Autenticación exitosa</string>
+    <string name="authentication_successful">¡Autenticación exitosa!</string>
+    <string name="authentication_failed">Autenticación fallida</string>
+    <string name="biometric_icon">Icono de Autenticación Biométrica</string>
+    <string name="biometric_failed">Analisi biométrico fallido</string>
+
+    <string name="tutorial_title">Tutorial de Permisos</string>
+    <string name="permissions_description">
+        1. Cámara: Para tomar fotos y grabar videos.
+        2. Micrófono: Para grabar sonidos.
+        3. Galería: Para acceder a las fotos y videos almacenados en tu dispositivo.
+        4. Almacenamiento: Para leer y escribir archivos en tu dispositivo.
+        5. Contactos: Para acceder a la lista de tus contactos.
+        6. Ubicación: Para obtener tu ubicación aproximada.
+        7. Teléfono: Para realizar y gestionar llamadas.
+    </string>
+    <string name="btn_continue">Continuar</string>
+
+    <string name="export_logs_title">Exportar Logs</string>
+    <string name="export_logs_description">Presiona el botón para exportar los logs de la aplicación.</string>
+    <string name="btn_export_logs">Exportar Logs</string>
+    <string name="export_logs_success">Logs exportados correctamente</string>
+    <string name="export_logs_error">Error al exportar los logs</string>
+    <string name="export_logs_icon">Icono de Exportación de Logs</string>
+
+    <string name="notification_title">Notificaciones de Acceso a Datos Sensibles</string>
+    <string name="notification_description">Habilita las notificaciones para que te alertemos cuando se acceda a datos sensibles.</string>
+    <string name="btn_enable_notifications">Habilitar Notificaciones</string>
+    <string name="notification_icon">Icono de Notificación de Acceso a Datos</string>
+
+    <string name="privacy_settings_title">Configuración de Privacidad</string>
+    <string name="privacy_description">Activa o desactiva la protección de privacidad para gestionar cómo se manejan tus datos.</string>
+    <string name="switch_privacy">Protección de Privacidad</string>
+    <string name="privacy_icon">Icono de Configuración de Privacidad</string>
 </resources>

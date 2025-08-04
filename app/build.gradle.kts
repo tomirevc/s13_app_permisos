@@ -12,7 +12,7 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -71,8 +71,15 @@ dependencies {
     // Para RecyclerView y CardView
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
-    
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+// Dependencias para la autenticación biométrica
+    implementation("androidx.biometric:biometric:1.1.0")
+
+// Dependencia para ViewPager (tutorial)
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

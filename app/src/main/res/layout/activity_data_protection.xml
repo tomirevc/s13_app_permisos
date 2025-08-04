@@ -1,93 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@color/white"
+    tools:context=".DataProtectionActivity">
 
+    <!-- Título de la actividad -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvDataProtectionTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/activity_data_protection"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Descripción de protección de datos -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvDataProtectionDescription"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Información de Protección de Datos"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDataProtectionTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <!-- ScrollView para mostrar la información de protección -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDataProtectionDescription">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvDataProtectionInfo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cargando información de protección..."
-                android:textSize="14sp"
-                android:padding="12dp"
-                android:background="@android:color/darker_gray"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="16dp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Logs de Acceso"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                <!-- Información de protección de datos -->
+                <TextView
+                    android:id="@+id/tvDataProtectionInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/darker_gray"
+                    android:padding="12dp"
+                    android:text="Cargando información de protección..."
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tvAccessLogs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cargando logs..."
-                android:textSize="12sp"
-                android:padding="12dp"
-                android:background="@android:color/darker_gray"
-                android:textColor="@android:color/white"
-                android:fontFamily="monospace" />
+                <!-- Logs de acceso -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Logs de Acceso"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvAccessLogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
+                    android:fontFamily="monospace"
+                    android:padding="12dp"
+                    android:text="Cargando logs..."
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
 
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 
+    <!-- Contenedor de los botones para ver los logs y limpiar los datos -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAccessLogs"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="NotSibling">
 
-        <Button
-            android:id="@+id/btnViewLogs"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_view_logs"
-            android:layout_marginEnd="8dp" />
+        <!-- Botón para ver los logs -->
 
-        <Button
-            android:id="@+id/btnClearData"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btn_clear_data"
-            android:layout_marginStart="8dp" />
-
+        <!-- Botón para limpiar los datos -->
     </LinearLayout>
 
-</LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewLogs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/btn_view_logs"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="478dp"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClearData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/btn_clear_data"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        tools:layout_editor_absoluteX="195dp"
+        tools:layout_editor_absoluteY="481dp"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

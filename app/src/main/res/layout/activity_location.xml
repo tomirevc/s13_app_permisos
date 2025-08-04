@@ -1,67 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    android:background="@color/white"
+    tools:context=".LocationActivity">
 
+    <!-- Título de la actividad -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvLocationTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/activity_location"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Estado del permiso de ubicación -->
     <TextView
         android:id="@+id/tvLocationStatus"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Estado del permiso de ubicación"
         android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <!-- Información de la ubicación -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationStatus"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.3">
 
-        <TextView
-            android:id="@+id/tvLocationInfo"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🗺️ Presiona el botón para obtener ubicación aproximada"
-            android:textSize="14sp"
-            android:padding="16dp"
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/white" />
+            android:layout_height="match_parent">
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/tvLocationInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🗺️ Presiona el botón para obtener ubicación aproximada"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:background="@android:color/darker_gray"
+                android:textColor="@android:color/white" />
 
-    <Button
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Botón para obtener la ubicación -->
+
+    <!-- Botón para solicitar permisos -->
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGetLocation"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/btn_get_location"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+        app:icon="@android:drawable/ic_menu_mylocation"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationInfo"
+        tools:ignore="NotSibling" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRequestPermission"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_grant_permission"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorAccent"
+        app:icon="@android:drawable/ic_menu_add"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/btnGetLocation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Mensaje de seguridad de la ubicación -->
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="🔒 Solo ubicación aproximada - No se usa GPS preciso"
         android:textSize="12sp"
         android:gravity="center"
+        android:textColor="@android:color/darker_gray"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/darker_gray" />
+        app:layout_constraintTop_toBottomOf="@id/btnRequestPermission"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,67 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    tools:context=".ContactsActivity"
+    android:background="@color/white">
 
+    <!-- Título de la actividad -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvContactsTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/activity_contacts"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Estado del permiso de contactos -->
     <TextView
         android:id="@+id/tvContactsStatus"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Estado del permiso de contactos"
         android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvContactsTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <!-- Lista de contactos (envuelta en ScrollView) -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tvContactsStatus"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.4">
 
-        <TextView
-            android:id="@+id/tvContactsList"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📱 Presiona el botón para cargar contactos"
-            android:textSize="14sp"
-            android:padding="16dp"
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/white" />
+            android:layout_height="match_parent">
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/tvContactsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📱 Presiona el botón para cargar contactos"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:padding="16dp"
+                android:background="@android:color/darker_gray" />
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 
-    <Button
+    <!-- Botón para ver los contactos -->
+
+    <!-- Botón para solicitar permisos -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnViewContacts"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/btn_view_contacts"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+        app:icon="@drawable/ic_contacts"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvContactsList"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="425dp"
+        tools:ignore="NotSibling" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRequestPermission"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_grant_permission"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:icon="@drawable/ic_contacts"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/btnViewContacts"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <!-- Mensaje de protección de datos -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvDataProtection"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="🔒 Los contactos se procesan localmente y se anonimizan"
         android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
         android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/darker_gray" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnRequestPermission"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
